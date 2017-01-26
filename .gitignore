@@ -1,0 +1,8 @@
+#output files
+out/
+
+#iml file
+.LeetCode.iml
+
+#idea files
+.idea
