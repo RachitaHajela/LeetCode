@@ -3,19 +3,21 @@ package com.edu;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
+/*
  * Created by RHAJELA on 3/22/2017.
+
  */
 public class BinaryTreePaths {
 
     public List<String> binaryTreePaths(TreeNode root) {
+
         List<String> solution = new ArrayList<>();
 
         if (root != null) {
             findPaths(root, "", solution);
         }
         return solution;
-
+gi
     }
 
     private void findPaths(TreeNode root, String path, List<String> solution) {
@@ -31,5 +33,6 @@ public class BinaryTreePaths {
         }
 
     }
+
 
 }
