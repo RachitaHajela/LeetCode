@@ -8,7 +8,12 @@ import java.util.*;
 public class LevelOrderTraversal {
 
     public List<List<Integer>> levelOrder(TreeNode root) {
-    List<List<Integer>> levelList = new ArrayList<>();
+
+        /***1. use sol for levelOrder traversal 1.
+         * 2.  use levels in the 2nd function and collections.reverse
+         */
+
+        List<List<Integer>> levelList = new ArrayList<>();
         if(root == null) {return levelList;}
 
         LinkedList<TreeNode> queue = new LinkedList<>();
@@ -28,7 +33,7 @@ public class LevelOrderTraversal {
                     queue.add(temp.right);
                 }
             }
-            levelList.add(nodes);
+            levelList.add(nodes);    //can change this to levelList.add(0,nodes) for level order traversal II
 
 
         }
