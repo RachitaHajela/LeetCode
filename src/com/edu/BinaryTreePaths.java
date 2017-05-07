@@ -17,7 +17,6 @@ public class BinaryTreePaths {
             findPaths(root, "", solution);
         }
         return solution;
-gi
     }
 
     private void findPaths(TreeNode root, String path, List<String> solution) {
@@ -33,6 +32,4 @@ gi
         }
 
     }
-
-
 }
