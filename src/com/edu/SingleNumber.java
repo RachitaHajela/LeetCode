@@ -46,7 +46,9 @@ public class SingleNumber {
             if(entry.getValue() == 1) {
                 return entry.getKey();
             }
-        }*/
-        return 0;
+        }
+         return 0;
+        */
+
     }
 }
