@@ -15,7 +15,7 @@ public class GroupAnagrams {
         HashMap<HashSet<Character>,List<String>> map = new HashMap<>();
         int size = strs.length;
         for(int  i = 0; i<size ; i++ ) {
-            
+
         }
         return result;
 
