@@ -10,7 +10,7 @@ public class ValidateBinarySearchTree {
         3) Check if the temp array is sorted in ascending order, if it is, then the tree is BST. */
 
         return isBST(root,Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
-    
+
 
        /*
        Correct but not efficient
