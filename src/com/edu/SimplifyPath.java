@@ -24,7 +24,7 @@ public class SimplifyPath {
             }
         }
         List<String> newPath = new ArrayList<>(stack);
-        return "/" + String.join("/",newPath);
+        return "/" ;//+ String.join("/",newPath);
 
        /* StringBuilder sb = new StringBuilder("/");
         ArrayList<String> dirList  = new ArrayList<>();
