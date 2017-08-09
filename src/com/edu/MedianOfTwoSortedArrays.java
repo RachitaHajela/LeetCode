@@ -6,6 +6,7 @@ package com.edu;
 public class MedianOfTwoSortedArrays {
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
         int total = nums1.length + nums2.length;
+        return 0;
     }
 
     private int findKth(int A[], int B[], int k, int aStart, int aEnd, int bStart, int bEnd) {
@@ -21,6 +22,6 @@ public class MedianOfTwoSortedArrays {
         if(k == 0) {
             return A[aStart] < B[bStart] ? A[aStart] : B[bStart];
         }
-
+        return 0;
     }
 }
