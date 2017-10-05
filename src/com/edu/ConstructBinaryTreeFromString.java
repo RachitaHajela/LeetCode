@@ -1,48 +1,53 @@
 package com.edu;
 
+import sun.reflect.generics.tree.Tree;
+
 /**
  * Created by RHAJELA on 10/4/2017.
  */
 public class ConstructBinaryTreeFromString {
 
+    private int i = 0;
+
     public TreeNode str2tree(String s) {
+        if (s.equals("")) return null;
+        TreeNode root = helper(s.toCharArray());
+        return root;
+    }
+
+    private TreeNode helper(char[] values) {
         TreeNode root = null;
-        if(s.length() == 0) {
-            return root;
+
+        if (i == values.length) {
+            return null;
         }
+        int val = getIntVal(values);
+        root = new TreeNode(val);
 
-        char[] values = s.toCharArray();
-
-
-        root = createTree(values, 0, values.length-1);
+        TreeNode left = null, right = null;
+        if (i < values.length && values[i] == '(') {
+            i++;
+            left = helper(values);
+        }
+        if (i < values.length && values[i] == '(') {
+            i++;
+            right = helper(values);
+        }
+        root.left = left;
+        root.right = right;
+        i++;
         return root;
     }
 
-    private TreeNode createTree(char[] values, int start, int end) {
-        TreeNode root = null ;
-        if(start == end) {
-            root = new TreeNode(Integer.parseInt(""+values[start]));
-            return root;
+    private int getIntVal(char[] values) {
+
+        StringBuilder sb = new StringBuilder();
+        while (i < values.length && (values[i] == '-' || Character.isDigit(values[i]))) {
+            sb.append(values[i]);
+            i++;
         }
-        String v = "";
-        if(values[start] == '-') {
-            v = v+"-";
-            start++;
-        }
-        v = v + values[start];
-        start++;
-        root = new TreeNode(Integer.parseInt(v));
-        if(start < end) {
-           createSubTrees(root,values,start,end);
-        }
-
-        return root;
-    }
-
-    private void createSubTrees(TreeNode root, char[] values, int start, int end) {
-        int startLef
-
-
+        int val = Integer.valueOf(sb.toString());
+        return val;
 
     }
 }
