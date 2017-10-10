@@ -7,7 +7,7 @@ public class NumberOfIslands {
 
     public int numIslands(char[][] grid) {
         int count = 0;
-        
+
         int n = grid.length;
         int m = grid[0].length;
         
