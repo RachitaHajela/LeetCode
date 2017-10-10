@@ -1,9 +1,6 @@
 package com.edu;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Rachita on 10/8/2017.
@@ -11,48 +8,65 @@ import java.util.List;
 public class WordLadder2 {
 
     public List<List<String>> findLadders(String beginWord, String endWord, List<String> wordList) {
-
+        HashSet<String> dict = new HashSet<>(wordList);
         List<List<String>> result = new ArrayList<>();
-        HashSet<String> visited = new HashSet<>();
-        LinkedList<QItem> queue = new LinkedList<>();
-        int minLength = wordList.size()+1;
 
-        visited.add(beginWord);
+        LinkedList<QItem> queue = new LinkedList<>();
+        int minLength = wordList.size() + 1;
+
         List<String> newList = new ArrayList<>();
         newList.add(beginWord);
-        queue.add(new QItem(beginWord,1, newList));
-        Boolean shouldAdd = true;
+        queue.add(new QItem(beginWord, 1, newList));
+
         while (!queue.isEmpty()) {
             QItem curr = queue.poll();
-            wordList.remove(curr.word);
-
-            int listSize = wordList.size();
+            dict.remove(curr.word);
+            List<String> neighbors = getNeighbors(curr.word, dict);
+            int listSize = neighbors.size();
             for (int i = 0; i < listSize; i++) {
-                if (!visited.contains(wordList.get(i)) && isAdjacent(curr.word, wordList.get(i))) {
-                    if (wordList.get(i).equals(endWord)) {
-                        List<String> resultList = new ArrayList<>(curr.curWay);
-                        resultList.add(endWord);
-                        if(curr.len+1 < minLength) {
-                            result.clear();
-                            result.add(resultList);
-                            minLength = curr.len+1;
-                        }
-                        else if (curr.len + 1 == minLength) {
-                            result.add(resultList);
-                        }
-                        shouldAdd = false;
-                    }
-                    visited.add(wordList.get(i));
-                    if(shouldAdd) {
-                        List<String> tempList = new ArrayList<>(curr.curWay);
-                        tempList.add(wordList.get(i));
-                        queue.add(new QItem(wordList.get(i), curr.len+ 1,tempList));
+                if (neighbors.get(i).equals(endWord)) {
+                    List<String> resultList = new ArrayList<>(curr.curWay);
+                    resultList.add(endWord);
+                    if (curr.len + 1 < minLength) {
+                        result.clear();
+                        result.add(resultList);
+                        minLength = curr.len + 1;
+                    } else if (curr.len + 1 == minLength) {
+                        result.add(resultList);
                     }
                 }
+
+                List<String> tempList = new ArrayList<>(curr.curWay);
+                tempList.add(neighbors.get(i));
+                queue.add(new QItem(neighbors.get(i), curr.len + 1, tempList));
             }
         }
 
         return result;
+    }
+
+    private List<String> getNeighbors(String word, Set<String> dictionary) {
+        List<String> neighBorList = new ArrayList<>();
+        char[] chars = word.toCharArray();
+
+        for (int i = 0; i < chars.length; i++) {
+            char original = chars[i];
+            for (char tem = 'a'; tem <= 'z'; tem++) {
+                if (tem != original) {
+                    chars[i] = tem;
+                    String newWord = new String(chars);
+                    if (dictionary.contains(newWord)) {
+                        System.out.print("Neighbors of " + word + " :" + newWord);
+                        neighBorList.add(newWord);
+                    }
+                }
+            }
+            chars[i] = original;
+        }
+
+        System.out.print("\n");
+
+        return neighBorList;
     }
 
     private boolean isAdjacent(String a, String b) {
@@ -74,8 +88,8 @@ public class WordLadder2 {
 
         QItem(String w, int l, List<String> pastWords) {
             this.word = w;
-            curWay = pastWords;
-            int len = l;
+            this.curWay = pastWords;
+            this.len = l;
         }
     }
 }
